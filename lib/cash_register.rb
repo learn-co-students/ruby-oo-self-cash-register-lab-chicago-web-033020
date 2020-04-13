@@ -1,25 +1,27 @@
 require 'pry'
+
 class CashRegister
   attr_accessor :discount, :total, :item, :items
   attr_reader :price, :quantity
 
   def initialize(discount=nil)
-    @total = 0
-    @discount = discount
+    @total = 0 #sets an instance variable @total on initialization to zero
+    @discount = discount #optionally takes an employee discount on initialization
     @items = []
   end
 
   def add_item(item, price, quantity=1)
      @price = price
      @quantity = quantity
-    @total += @price * @quantity
-     quantity.times {@items << item}
+     self.total += self.price * self.quantity
+     quantity.times {self.items << item}
     end
 
+
   def apply_discount
-    if @discount
-       @total = @total * (1.00 - @discount.to_f / 100)
-      "After the discount, the total comes to $#{@total.to_i}."
+    if self.discount
+       self.total = self.total * (1.00 - self.discount.to_f / 100)
+      "After the discount, the total comes to $#{self.total.to_i}."
     else
       "There is no discount to apply."
     end
@@ -27,6 +29,6 @@ class CashRegister
 
 
   def void_last_transaction
-    @total -= self.price * self.quantity
+    self.total -= self.price * self.quantity
   end
 end
